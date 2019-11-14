@@ -151,7 +151,7 @@
             // 
             // btnClearImage
             // 
-            this.btnClearImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
+            this.btnClearImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
             this.btnClearImage.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnClearImage.Location = new System.Drawing.Point(513, 676);
             this.btnClearImage.Name = "btnClearImage";
