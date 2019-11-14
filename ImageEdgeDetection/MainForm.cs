@@ -4,12 +4,7 @@
  * Licensed under Ms-PL 
 */
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Imaging;
@@ -47,6 +42,9 @@ namespace ImageEdgeDetection
 
                 ApplyFilter(true);
             }
+
+            //Handle input state change if needed
+            handleInputStateChange();
         }
 
         private void btnSaveNewImage_Click(object sender, EventArgs e)
@@ -192,9 +190,76 @@ namespace ImageEdgeDetection
             }
         }
 
+        /// <summary>
+        /// Resets all settings and clear image.
+        /// Called when the button "Clear" is pressed
+        /// </summary>
+        private void resetAll()
+        {
+            originalBitmap = null;
+            previewBitmap = null;
+            picPreview.Image = null;
+            cmbEdgeDetection.SelectedItem = "None"; //default value is None
+            checkBoxSwap.Checked = false;
+            checkBoxCrazy.Checked = false;
+
+        }
+
+        /// <summary>
+        /// Method that deals with input state changes
+        /// and enable / disable inputs when needed.
+        /// </summary>
+        private void handleInputStateChange()
+        {
+            //check to enable edge detection
+            if((checkBoxSwap.Checked || checkBoxCrazy.Checked) && originalBitmap != null)
+            {
+                //Edge detection only avaliable if at least one filter is selected
+                //and if an image has been uploaded.
+                cmbEdgeDetection.Enabled = true;
+            }
+            else
+            {
+                cmbEdgeDetection.Enabled = false;
+            }
+
+            //check to enable filters
+            if(cmbEdgeDetection.SelectedItem.ToString() != "None" || originalBitmap == null)
+            {
+                //Change filter only avaliable if no edge detection is enabled
+                flowLayoutPanelCheckBoxes.Enabled = false;
+            }
+            else
+            {
+                //Change filter is avaliable is no edge detection is enabled
+                flowLayoutPanelCheckBoxes.Enabled = true;
+            }
+        }
+
         private void NeighbourCountValueChangedEventHandler(object sender, EventArgs e)
         {
             ApplyFilter(true);
+            handleInputStateChange();
+        }
+
+        private void checkBoxSwap_CheckedChanged(object sender, EventArgs e)
+        {
+            //Checkbox to activate Swap Filter
+            handleInputStateChange();
+        }
+
+        private void checkBoxCrazy_CheckedChanged(object sender, EventArgs e)
+        {
+            //Checkbox to activate Crazy filter
+            handleInputStateChange();
+        }
+
+        private void btnClearImage_Click(object sender, EventArgs e)
+        {
+            //When "Clear" is pressed, reset image and settings and
+            //handle input state.
+            resetAll();
+            handleInputStateChange();
         }
     }
 }
