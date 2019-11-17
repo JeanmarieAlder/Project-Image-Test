@@ -200,8 +200,9 @@ namespace ImageEdgeDetection
             previewBitmap = null;
             picPreview.Image = null;
             cmbEdgeDetection.SelectedItem = "None"; //default value is None
-            checkBoxSwap.Checked = false;
-            checkBoxCrazy.Checked = false;
+            radioButtonCrazy.Checked = false;
+            radioButtonSwap.Checked = false;
+            radioButtonNone.Checked = false;
 
         }
 
@@ -212,7 +213,7 @@ namespace ImageEdgeDetection
         private void handleInputStateChange()
         {
             //check to enable edge detection
-            if((checkBoxSwap.Checked || checkBoxCrazy.Checked) && originalBitmap != null)
+            if ((radioButtonCrazy.Checked || radioButtonSwap.Checked || radioButtonNone.Checked) && originalBitmap != null)
             {
                 //Edge detection only avaliable if at least one filter is selected
                 //and if an image has been uploaded.
@@ -224,7 +225,7 @@ namespace ImageEdgeDetection
             }
 
             //check to enable filters
-            if(cmbEdgeDetection.SelectedItem.ToString() != "None" || originalBitmap == null)
+            if (cmbEdgeDetection.SelectedItem.ToString() != "None" || originalBitmap == null)
             {
                 //Change filter only avaliable if no edge detection is enabled
                 flowLayoutPanelCheckBoxes.Enabled = false;
@@ -242,18 +243,6 @@ namespace ImageEdgeDetection
             handleInputStateChange();
         }
 
-        private void checkBoxSwap_CheckedChanged(object sender, EventArgs e)
-        {
-            //Checkbox to activate Swap Filter
-            handleInputStateChange();
-        }
-
-        private void checkBoxCrazy_CheckedChanged(object sender, EventArgs e)
-        {
-            //Checkbox to activate Crazy filter
-            handleInputStateChange();
-        }
-
         private void btnClearImage_Click(object sender, EventArgs e)
         {
             //When "Clear" is pressed, reset image and settings and
@@ -261,5 +250,59 @@ namespace ImageEdgeDetection
             resetAll();
             handleInputStateChange();
         }
+
+        private void radioButtonCrazy_CheckedChanged(object sender, EventArgs e)
+        {
+            //Checkbox to activate Crazy filter
+            handleInputStateChange();
+            Bitmap selectedSource = null;
+
+            if (previewBitmap != null)
+            {
+                selectedSource = previewBitmap;
+            }
+            else
+            {
+                selectedSource = originalBitmap;
+            }
+            //check if it was set or not
+            if ((radioButtonCrazy.Checked) && selectedSource != null)
+            {
+                picPreview.Image = selectedSource;
+                System.Drawing.Image te = ImageFilters.ApplyFilterSwapDivide(new Bitmap(picPreview.Image), 1, 1, 2, 1);
+                previewBitmap = ImageFilters.ApplyFilterSwap(new Bitmap(te));
+                picPreview.Image = previewBitmap;
+            }
+        }
+
+        private void radioButtonSwap_CheckedChanged(object sender, EventArgs e)
+        {
+            //Checkbox to activate Swap Filter
+            handleInputStateChange();
+            Bitmap selectedSource = null;
+
+            if (previewBitmap != null)
+            {
+                selectedSource = previewBitmap;
+            }
+            else
+            {
+                selectedSource = originalBitmap;
+            }
+
+            if ((radioButtonSwap.Checked) && selectedSource != null)
+            {
+                picPreview.Image = selectedSource;
+                previewBitmap = ImageFilters.ApplyFilterSwap(new Bitmap(picPreview.Image));
+                picPreview.Image = previewBitmap;
+            }
+
+        }
+
+        private void radioButtonNone_CheckedChanged(object sender, EventArgs e)
+        {
+            picPreview.Image = originalBitmap;
+        }
+
     }
 }
