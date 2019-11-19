@@ -24,11 +24,29 @@ namespace ImageEdgeDetection
             cmbEdgeDetection.SelectedIndex = 0;
         }
 
+        public void MainForm_Load(object sender, System.EventArgs e)
+        {
+            //Tooltips
+            // Create the ToolTip and associate with the Form container.
+            ToolTip toolTip1 = new ToolTip();
+
+            // Set up the delays for the ToolTip.
+            toolTip1.AutoPopDelay = 5000;
+            toolTip1.InitialDelay = 1000;
+            toolTip1.ReshowDelay = 500;
+
+            toolTip1.ShowAlways = true;
+
+            // Set up the ToolTip text for the Button and Checkbox.
+            toolTip1.SetToolTip(this.cmbEdgeDetection, "Select a filter to edit this");
+            toolTip1.SetToolTip(this.flowLayoutPanelCheckBoxes, "Edge detection must be none to edit this.");
+        }
+
         private void btnOpenOriginal_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Select an image file.";
-            ofd.Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg";
+            ofd.Filter = "Jpeg Images(*.jpg)|*.jpg|Png Images(*.png)|*.png";
             ofd.Filter += "|Bitmap Images(*.bmp)|*.bmp";
 
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -55,7 +73,7 @@ namespace ImageEdgeDetection
             {
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Title = "Specify a file name and file path";
-                sfd.Filter = "Png Images(*.png)|*.png|Jpeg Images(*.jpg)|*.jpg";
+                sfd.Filter = "Jpeg Images(*.jpg)|*.jpg|Png Images(*.png)|*.png";
                 sfd.Filter += "|Bitmap Images(*.bmp)|*.bmp";
 
                 if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -257,6 +275,7 @@ namespace ImageEdgeDetection
             handleInputStateChange();
             Bitmap selectedSource = null;
 
+            //When there is a previewBitmap we use this, otherwise we can use the originalBitmap
             if (previewBitmap != null)
             {
                 selectedSource = previewBitmap;
@@ -265,7 +284,7 @@ namespace ImageEdgeDetection
             {
                 selectedSource = originalBitmap;
             }
-            //check if it was set or not
+            //check if it is set
             if ((radioButtonCrazy.Checked) && selectedSource != null)
             {
                 picPreview.Image = selectedSource;
@@ -273,6 +292,8 @@ namespace ImageEdgeDetection
                 previewBitmap = ImageFilters.ApplyFilterSwap(new Bitmap(te));
                 picPreview.Image = previewBitmap;
             }
+            //safe it in the resultBitmap
+            resultBitmap = selectedSource;
         }
 
         private void radioButtonSwap_CheckedChanged(object sender, EventArgs e)
@@ -296,6 +317,8 @@ namespace ImageEdgeDetection
                 previewBitmap = ImageFilters.ApplyFilterSwap(new Bitmap(picPreview.Image));
                 picPreview.Image = previewBitmap;
             }
+            //safe it in the resultBitmap
+            resultBitmap = selectedSource;
 
         }
 
@@ -303,6 +326,5 @@ namespace ImageEdgeDetection
         {
             picPreview.Image = originalBitmap;
         }
-
     }
 }
