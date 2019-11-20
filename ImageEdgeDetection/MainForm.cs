@@ -35,12 +35,15 @@ namespace ImageEdgeDetection
 
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                //get the bitmap
                 StreamReader streamReader = new StreamReader(ofd.FileName);
-                originalBitmap = (Bitmap)Bitmap.FromStream(streamReader.BaseStream);
+                Bitmap newPicture = (Bitmap)Bitmap.FromStream(streamReader.BaseStream);
                 streamReader.Close();
 
-                previewBitmap = originalBitmap.CopyToSquareCanvas(picPreview.Width);
-                setPreviewPic(previewBitmap);
+                //resize the bitmap, so that the filters can be applied without long waiting time
+                originalBitmap = newPicture.CopyToSquareCanvas(picPreview.Width);
+
+                setPreviewPic(originalBitmap);
 
                 ApplyFilterEdge(true);
             }
