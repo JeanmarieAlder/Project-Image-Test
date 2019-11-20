@@ -24,23 +24,7 @@ namespace ImageEdgeDetection
             cmbEdgeDetection.SelectedIndex = 0;
         }
 
-        public void MainForm_Load(object sender, System.EventArgs e)
-        {
-            //Tooltips
-            // Create the ToolTip and associate with the Form container.
-            ToolTip toolTip1 = new ToolTip();
 
-            // Set up the delays for the ToolTip.
-            toolTip1.AutoPopDelay = 5000;
-            toolTip1.InitialDelay = 1000;
-            toolTip1.ReshowDelay = 500;
-
-            toolTip1.ShowAlways = true;
-
-            // Set up the ToolTip text for the Button and Checkbox.
-            toolTip1.SetToolTip(this.cmbEdgeDetection, "Select a filter to edit this");
-            toolTip1.SetToolTip(this.flowLayoutPanelCheckBoxes, "Edge detection must be none to edit this.");
-        }
 
         private void btnOpenOriginal_Click(object sender, EventArgs e)
         {
@@ -95,7 +79,6 @@ namespace ImageEdgeDetection
                     streamWriter.Flush();
                     streamWriter.Close();
 
-                    resultBitmap = null;
                 }
             }
         }
@@ -116,7 +99,7 @@ namespace ImageEdgeDetection
             }
             else
             {
-                selectedSource = originalBitmap;
+                selectedSource = resultBitmap;
             }
 
             if (selectedSource != null)
@@ -285,30 +268,29 @@ namespace ImageEdgeDetection
 
         private void applyfilters()
         {
-            Bitmap selectedSource = null;
-            
-            selectedSource = originalBitmap;
-            picPreview.Image = previewBitmap;
-
-
-            if (selectedSource != null)
+            Bitmap temp = originalBitmap;
+            if (temp != null)
             {
-                //check if it is set
-                if (crazyFilter.Checked)
-                {
-                    System.Drawing.Image te = ImageFilters.ApplyFilterSwapDivide(new Bitmap(picPreview.Image), 1, 1, 2, 1);
-                    previewBitmap = ImageFilters.ApplyFilterSwap(new Bitmap(te));
-                }
-
                 if (swapFilter.Checked)
                 {
-                    previewBitmap = ImageFilters.ApplyFilterSwap(new Bitmap(picPreview.Image));
+                    temp = ImageFilters.ApplyFilterSwap(new Bitmap(temp));
                 }
+                if (crazyFilter.Checked)
+                {
+                    temp = ImageFilters.ApplyFilterSwapDivide(new Bitmap(temp), 1, 1, 2, 1);
+                    temp = ImageFilters.ApplyFilterSwap(new Bitmap(temp));
+                }
+
+                setPreviewPic(temp);
+                resultBitmap = temp;
+                previewBitmap = temp;
             }
-            
-            picPreview.Image = previewBitmap;
-            //safe it in the resultBitmap
-            resultBitmap = selectedSource;
+
+        }
+
+        private void setPreviewPic(Bitmap imgToDisplay)
+        {
+            picPreview.Image = imgToDisplay;
         }
     }
 }
