@@ -40,9 +40,9 @@ namespace ImageEdgeDetection
                 streamReader.Close();
 
                 previewBitmap = originalBitmap.CopyToSquareCanvas(picPreview.Width);
-                picPreview.Image = previewBitmap;
+                setPreviewPic(previewBitmap);
 
-                ApplyFilter(true);
+                ApplyFilterEdge(true);
             }
 
             //Handle input state change if needed
@@ -51,7 +51,7 @@ namespace ImageEdgeDetection
 
         private void btnSaveNewImage_Click(object sender, EventArgs e)
         {
-            ApplyFilter(false);
+            ApplyFilterEdge(false);
 
             if (resultBitmap != null)
             {
@@ -83,15 +83,15 @@ namespace ImageEdgeDetection
             }
         }
 
-        private void ApplyFilter(bool preview)
+        private void ApplyFilterEdge(bool preview)
         {
             if (previewBitmap == null || cmbEdgeDetection.SelectedIndex == -1)
             {
                 return;
             }
 
-            Bitmap selectedSource = null;
-            Bitmap bitmapResult = null;
+            Bitmap selectedSource;
+            Bitmap resultEdgeFilter = null;
 
             if (preview == true)
             {
@@ -102,91 +102,92 @@ namespace ImageEdgeDetection
                 selectedSource = resultBitmap;
             }
 
+            // Apply the different edge filters
             if (selectedSource != null)
             {
                 if (cmbEdgeDetection.SelectedItem.ToString() == "None")
                 {
-                    bitmapResult = selectedSource;
+                    resultEdgeFilter = selectedSource;
                 }
                 else if (cmbEdgeDetection.SelectedItem.ToString() == "Laplacian 3x3")
                 {
-                    bitmapResult = selectedSource.Laplacian3x3Filter(false);
+                    resultEdgeFilter = selectedSource.Laplacian3x3Filter(false);
                 }
                 else if (cmbEdgeDetection.SelectedItem.ToString() == "Laplacian 3x3 Grayscale")
                 {
-                    bitmapResult = selectedSource.Laplacian3x3Filter(true);
+                    resultEdgeFilter = selectedSource.Laplacian3x3Filter(true);
                 }
                 else if (cmbEdgeDetection.SelectedItem.ToString() == "Laplacian 5x5")
                 {
-                    bitmapResult = selectedSource.Laplacian5x5Filter(false);
+                    resultEdgeFilter = selectedSource.Laplacian5x5Filter(false);
                 }
                 else if (cmbEdgeDetection.SelectedItem.ToString() == "Laplacian 5x5 Grayscale")
                 {
-                    bitmapResult = selectedSource.Laplacian5x5Filter(true);
+                    resultEdgeFilter = selectedSource.Laplacian5x5Filter(true);
                 }
                 else if (cmbEdgeDetection.SelectedItem.ToString() == "Laplacian of Gaussian")
                 {
-                    bitmapResult = selectedSource.LaplacianOfGaussianFilter();
+                    resultEdgeFilter = selectedSource.LaplacianOfGaussianFilter();
                 }
                 else if (cmbEdgeDetection.SelectedItem.ToString() == "Laplacian 3x3 of Gaussian 3x3")
                 {
-                    bitmapResult = selectedSource.Laplacian3x3OfGaussian3x3Filter();
+                    resultEdgeFilter = selectedSource.Laplacian3x3OfGaussian3x3Filter();
                 }
                 else if (cmbEdgeDetection.SelectedItem.ToString() == "Laplacian 3x3 of Gaussian 5x5 - 1")
                 {
-                    bitmapResult = selectedSource.Laplacian3x3OfGaussian5x5Filter1();
+                    resultEdgeFilter = selectedSource.Laplacian3x3OfGaussian5x5Filter1();
                 }
                 else if (cmbEdgeDetection.SelectedItem.ToString() == "Laplacian 3x3 of Gaussian 5x5 - 2")
                 {
-                    bitmapResult = selectedSource.Laplacian3x3OfGaussian5x5Filter2();
+                    resultEdgeFilter = selectedSource.Laplacian3x3OfGaussian5x5Filter2();
                 }
                 else if (cmbEdgeDetection.SelectedItem.ToString() == "Laplacian 5x5 of Gaussian 3x3")
                 {
-                    bitmapResult = selectedSource.Laplacian5x5OfGaussian3x3Filter();
+                    resultEdgeFilter = selectedSource.Laplacian5x5OfGaussian3x3Filter();
                 }
                 else if (cmbEdgeDetection.SelectedItem.ToString() == "Laplacian 5x5 of Gaussian 5x5 - 1")
                 {
-                    bitmapResult = selectedSource.Laplacian5x5OfGaussian5x5Filter1();
+                    resultEdgeFilter = selectedSource.Laplacian5x5OfGaussian5x5Filter1();
                 }
                 else if (cmbEdgeDetection.SelectedItem.ToString() == "Laplacian 5x5 of Gaussian 5x5 - 2")
                 {
-                    bitmapResult = selectedSource.Laplacian5x5OfGaussian5x5Filter2();
+                    resultEdgeFilter = selectedSource.Laplacian5x5OfGaussian5x5Filter2();
                 }
                 else if (cmbEdgeDetection.SelectedItem.ToString() == "Sobel 3x3")
                 {
-                    bitmapResult = selectedSource.Sobel3x3Filter(false);
+                    resultEdgeFilter = selectedSource.Sobel3x3Filter(false);
                 }
                 else if (cmbEdgeDetection.SelectedItem.ToString() == "Sobel 3x3 Grayscale")
                 {
-                    bitmapResult = selectedSource.Sobel3x3Filter();
+                    resultEdgeFilter = selectedSource.Sobel3x3Filter();
                 }
                 else if (cmbEdgeDetection.SelectedItem.ToString() == "Prewitt")
                 {
-                    bitmapResult = selectedSource.PrewittFilter(false);
+                    resultEdgeFilter = selectedSource.PrewittFilter(false);
                 }
                 else if (cmbEdgeDetection.SelectedItem.ToString() == "Prewitt Grayscale")
                 {
-                    bitmapResult = selectedSource.PrewittFilter();
+                    resultEdgeFilter = selectedSource.PrewittFilter();
                 }
                 else if (cmbEdgeDetection.SelectedItem.ToString() == "Kirsch")
                 {
-                    bitmapResult = selectedSource.KirschFilter(false);
+                    resultEdgeFilter = selectedSource.KirschFilter(false);
                 }
                 else if (cmbEdgeDetection.SelectedItem.ToString() == "Kirsch Grayscale")
                 {
-                    bitmapResult = selectedSource.KirschFilter();
+                    resultEdgeFilter = selectedSource.KirschFilter();
                 }
             }
 
-            if (bitmapResult != null)
+            if (resultEdgeFilter != null)
             {
                 if (preview == true)
                 {
-                    picPreview.Image = bitmapResult;
+                    setPreviewPic(resultEdgeFilter);
                 }
                 else
                 {
-                    resultBitmap = bitmapResult;
+                    resultBitmap = resultEdgeFilter;
                 }
             }
         }
@@ -199,10 +200,10 @@ namespace ImageEdgeDetection
         {
             originalBitmap = null;
             previewBitmap = null;
-            picPreview.Image = null;
+            setPreviewPic(null);
             cmbEdgeDetection.SelectedItem = "None"; //default value is None
-            crazyFilter.Checked = false;
-            swapFilter.Checked = false;
+            crazyFilterCheckBox.Checked = false;
+            swapFilterCheckBox.Checked = false;
         }
 
         /// <summary>
@@ -212,7 +213,7 @@ namespace ImageEdgeDetection
         private void handleInputStateChange()
         {
             //check to enable edge detection
-            if ((crazyFilter.Checked || swapFilter.Checked) && originalBitmap != null)
+            if ((crazyFilterCheckBox.Checked || swapFilterCheckBox.Checked) && originalBitmap != null)
             {
                 //Edge detection only avaliable if at least one filter is selected
                 //and if an image has been uploaded.
@@ -238,7 +239,7 @@ namespace ImageEdgeDetection
 
         private void NeighbourCountValueChangedEventHandler(object sender, EventArgs e)
         {
-            ApplyFilter(true);
+            ApplyFilterEdge(true);
             handleInputStateChange();
         }
 
@@ -271,11 +272,11 @@ namespace ImageEdgeDetection
             Bitmap temp = originalBitmap;
             if (temp != null)
             {
-                if (swapFilter.Checked)
+                if (swapFilterCheckBox.Checked)
                 {
                     temp = ImageFilters.ApplyFilterSwap(new Bitmap(temp));
                 }
-                if (crazyFilter.Checked)
+                if (crazyFilterCheckBox.Checked)
                 {
                     temp = ImageFilters.ApplyFilterSwapDivide(new Bitmap(temp), 1, 1, 2, 1);
                     temp = ImageFilters.ApplyFilterSwap(new Bitmap(temp));
@@ -292,5 +293,6 @@ namespace ImageEdgeDetection
         {
             picPreview.Image = imgToDisplay;
         }
+
     }
 }
