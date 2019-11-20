@@ -218,10 +218,8 @@ namespace ImageEdgeDetection
             previewBitmap = null;
             picPreview.Image = null;
             cmbEdgeDetection.SelectedItem = "None"; //default value is None
-            radioButtonCrazy.Checked = false;
-            radioButtonSwap.Checked = false;
-            radioButtonNone.Checked = false;
-
+            crazyFilter.Checked = false;
+            swapFilter.Checked = false;
         }
 
         /// <summary>
@@ -231,7 +229,7 @@ namespace ImageEdgeDetection
         private void handleInputStateChange()
         {
             //check to enable edge detection
-            if ((radioButtonCrazy.Checked || radioButtonSwap.Checked || radioButtonNone.Checked) && originalBitmap != null)
+            if ((crazyFilter.Checked || swapFilter.Checked) && originalBitmap != null)
             {
                 //Edge detection only avaliable if at least one filter is selected
                 //and if an image has been uploaded.
@@ -269,62 +267,43 @@ namespace ImageEdgeDetection
             handleInputStateChange();
         }
 
-        private void radioButtonCrazy_CheckedChanged(object sender, EventArgs e)
-        {
-            //Checkbox to activate Crazy filter
-            handleInputStateChange();
-            Bitmap selectedSource = null;
-
-            //When there is a previewBitmap we use this, otherwise we can use the originalBitmap
-            if (previewBitmap != null)
-            {
-                selectedSource = previewBitmap;
-            }
-            else
-            {
-                selectedSource = originalBitmap;
-            }
-            //check if it is set
-            if ((radioButtonCrazy.Checked) && selectedSource != null)
-            {
-                picPreview.Image = selectedSource;
-                System.Drawing.Image te = ImageFilters.ApplyFilterSwapDivide(new Bitmap(picPreview.Image), 1, 1, 2, 1);
-                previewBitmap = ImageFilters.ApplyFilterSwap(new Bitmap(te));
-                picPreview.Image = previewBitmap;
-            }
-            //safe it in the resultBitmap
-            resultBitmap = selectedSource;
-        }
-
-        private void radioButtonSwap_CheckedChanged(object sender, EventArgs e)
+        private void swapFilter_CheckedChanged(object sender, EventArgs e)
         {
             //Checkbox to activate Swap Filter
             handleInputStateChange();
+            //put the filters which are checked
+            applyfilters();
+        }
+
+        private void crazyFilter_CheckedChanged(object sender, EventArgs e)
+        {
+            //Checkbox to activate Crazy filter
+            handleInputStateChange();
+            //put the filters which are checked
+            applyfilters();
+        }
+
+        private void applyfilters()
+        {
             Bitmap selectedSource = null;
-
-            if (previewBitmap != null)
+            
+            selectedSource = originalBitmap;
+            
+            //check if it is set
+            if ((crazyFilter.Checked) && selectedSource != null)
             {
-                selectedSource = previewBitmap;
+                System.Drawing.Image te = ImageFilters.ApplyFilterSwapDivide(new Bitmap(selectedSource), 1, 1, 2, 1);
+                previewBitmap = ImageFilters.ApplyFilterSwap(new Bitmap(te));
+                picPreview.Image = previewBitmap;
             }
-            else
-            {
-                selectedSource = originalBitmap;
-            }
 
-            if ((radioButtonSwap.Checked) && selectedSource != null)
+            if ((swapFilter.Checked) && selectedSource != null)
             {
-                picPreview.Image = selectedSource;
-                previewBitmap = ImageFilters.ApplyFilterSwap(new Bitmap(picPreview.Image));
+                previewBitmap = ImageFilters.ApplyFilterSwap(new Bitmap(selectedSource));
                 picPreview.Image = previewBitmap;
             }
             //safe it in the resultBitmap
             resultBitmap = selectedSource;
-
-        }
-
-        private void radioButtonNone_CheckedChanged(object sender, EventArgs e)
-        {
-            picPreview.Image = originalBitmap;
         }
     }
 }

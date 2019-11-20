@@ -35,9 +35,8 @@
             this.labelDetection = new System.Windows.Forms.Label();
             this.flowLayoutPanelCheckBoxes = new System.Windows.Forms.FlowLayoutPanel();
             this.btnClearImage = new System.Windows.Forms.Button();
-            this.radioButtonSwap = new System.Windows.Forms.RadioButton();
-            this.radioButtonCrazy = new System.Windows.Forms.RadioButton();
-            this.radioButtonNone = new System.Windows.Forms.RadioButton();
+            this.crazyFilter = new System.Windows.Forms.CheckBox();
+            this.swapFilter = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             this.flowLayoutPanelCheckBoxes.SuspendLayout();
             this.SuspendLayout();
@@ -120,13 +119,12 @@
             // 
             // flowLayoutPanelCheckBoxes
             // 
-            this.flowLayoutPanelCheckBoxes.Controls.Add(this.radioButtonSwap);
-            this.flowLayoutPanelCheckBoxes.Controls.Add(this.radioButtonCrazy);
-            this.flowLayoutPanelCheckBoxes.Controls.Add(this.radioButtonNone);
+            this.flowLayoutPanelCheckBoxes.Controls.Add(this.swapFilter);
+            this.flowLayoutPanelCheckBoxes.Controls.Add(this.crazyFilter);
             this.flowLayoutPanelCheckBoxes.Enabled = false;
-            this.flowLayoutPanelCheckBoxes.Location = new System.Drawing.Point(195, 635);
+            this.flowLayoutPanelCheckBoxes.Location = new System.Drawing.Point(239, 635);
             this.flowLayoutPanelCheckBoxes.Name = "flowLayoutPanelCheckBoxes";
-            this.flowLayoutPanelCheckBoxes.Size = new System.Drawing.Size(283, 29);
+            this.flowLayoutPanelCheckBoxes.Size = new System.Drawing.Size(216, 29);
             this.flowLayoutPanelCheckBoxes.TabIndex = 0;
             // 
             // btnClearImage
@@ -141,41 +139,27 @@
             this.btnClearImage.UseVisualStyleBackColor = true;
             this.btnClearImage.Click += new System.EventHandler(this.btnClearImage_Click);
             // 
-            // radioButtonSwap
+            // crazyFilter
             // 
-            this.radioButtonSwap.AutoSize = true;
-            this.radioButtonSwap.Location = new System.Drawing.Point(3, 3);
-            this.radioButtonSwap.Name = "radioButtonSwap";
-            this.radioButtonSwap.Size = new System.Drawing.Size(98, 21);
-            this.radioButtonSwap.TabIndex = 24;
-            this.radioButtonSwap.TabStop = true;
-            this.radioButtonSwap.Text = "Swap Filter";
-            this.radioButtonSwap.UseVisualStyleBackColor = true;
-            this.radioButtonSwap.CheckedChanged += new System.EventHandler(this.radioButtonSwap_CheckedChanged);
+            this.crazyFilter.AutoSize = true;
+            this.crazyFilter.Location = new System.Drawing.Point(108, 3);
+            this.crazyFilter.Name = "crazyFilter";
+            this.crazyFilter.Size = new System.Drawing.Size(101, 21);
+            this.crazyFilter.TabIndex = 25;
+            this.crazyFilter.Text = "Crazy Filter";
+            this.crazyFilter.UseVisualStyleBackColor = true;
+            this.crazyFilter.CheckedChanged += new System.EventHandler(this.crazyFilter_CheckedChanged);
             // 
-            // radioButtonCrazy
+            // swapFilter
             // 
-            this.radioButtonCrazy.AutoSize = true;
-            this.radioButtonCrazy.Location = new System.Drawing.Point(107, 3);
-            this.radioButtonCrazy.Name = "radioButtonCrazy";
-            this.radioButtonCrazy.Size = new System.Drawing.Size(100, 21);
-            this.radioButtonCrazy.TabIndex = 25;
-            this.radioButtonCrazy.TabStop = true;
-            this.radioButtonCrazy.Text = "Crazy Filter";
-            this.radioButtonCrazy.UseVisualStyleBackColor = true;
-            this.radioButtonCrazy.CheckedChanged += new System.EventHandler(this.radioButtonCrazy_CheckedChanged);
-            // 
-            // radioButtonNone
-            // 
-            this.radioButtonNone.AutoSize = true;
-            this.radioButtonNone.Location = new System.Drawing.Point(213, 3);
-            this.radioButtonNone.Name = "radioButtonNone";
-            this.radioButtonNone.Size = new System.Drawing.Size(63, 21);
-            this.radioButtonNone.TabIndex = 26;
-            this.radioButtonNone.TabStop = true;
-            this.radioButtonNone.Text = "None";
-            this.radioButtonNone.UseVisualStyleBackColor = true;
-            this.radioButtonNone.CheckedChanged += new System.EventHandler(this.radioButtonNone_CheckedChanged);
+            this.swapFilter.AutoSize = true;
+            this.swapFilter.Location = new System.Drawing.Point(3, 3);
+            this.swapFilter.Name = "swapFilter";
+            this.swapFilter.Size = new System.Drawing.Size(99, 21);
+            this.swapFilter.TabIndex = 26;
+            this.swapFilter.Text = "Swap Filter";
+            this.swapFilter.UseVisualStyleBackColor = true;
+            this.swapFilter.CheckedChanged += new System.EventHandler(this.swapFilter_CheckedChanged);
             // 
             // MainForm
             // 
@@ -211,9 +195,8 @@
         private System.Windows.Forms.Label labelDetection;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelCheckBoxes;
         private System.Windows.Forms.Button btnClearImage;
-        private System.Windows.Forms.RadioButton radioButtonSwap;
-        private System.Windows.Forms.RadioButton radioButtonCrazy;
-        private System.Windows.Forms.RadioButton radioButtonNone;
+        private System.Windows.Forms.CheckBox crazyFilter;
+        private System.Windows.Forms.CheckBox swapFilter;
     }
 }
 
