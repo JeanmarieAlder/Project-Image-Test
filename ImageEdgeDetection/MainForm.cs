@@ -288,20 +288,25 @@ namespace ImageEdgeDetection
             Bitmap selectedSource = null;
             
             selectedSource = originalBitmap;
-            
-            //check if it is set
-            if ((crazyFilter.Checked) && selectedSource != null)
-            {
-                System.Drawing.Image te = ImageFilters.ApplyFilterSwapDivide(new Bitmap(selectedSource), 1, 1, 2, 1);
-                previewBitmap = ImageFilters.ApplyFilterSwap(new Bitmap(te));
-                picPreview.Image = previewBitmap;
-            }
+            picPreview.Image = previewBitmap;
 
-            if ((swapFilter.Checked) && selectedSource != null)
+
+            if (selectedSource != null)
             {
-                previewBitmap = ImageFilters.ApplyFilterSwap(new Bitmap(selectedSource));
-                picPreview.Image = previewBitmap;
+                //check if it is set
+                if (crazyFilter.Checked)
+                {
+                    System.Drawing.Image te = ImageFilters.ApplyFilterSwapDivide(new Bitmap(picPreview.Image), 1, 1, 2, 1);
+                    previewBitmap = ImageFilters.ApplyFilterSwap(new Bitmap(te));
+                }
+
+                if (swapFilter.Checked)
+                {
+                    previewBitmap = ImageFilters.ApplyFilterSwap(new Bitmap(picPreview.Image));
+                }
             }
+            
+            picPreview.Image = previewBitmap;
             //safe it in the resultBitmap
             resultBitmap = selectedSource;
         }
