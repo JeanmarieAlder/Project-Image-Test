@@ -63,9 +63,69 @@ namespace TestImageApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap test_image_computer_scientist {
+        internal static System.Drawing.Bitmap test_image_computer_scientist_laplacian33 {
             get {
-                object obj = ResourceManager.GetObject("test_image_computer_scientist", resourceCulture);
+                object obj = ResourceManager.GetObject("test_image_computer_scientist_laplacian33", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap test_image_computer_scientist_laplacian33grey {
+            get {
+                object obj = ResourceManager.GetObject("test_image_computer_scientist_laplacian33grey", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap test_image_computer_scientist_laplacian55 {
+            get {
+                object obj = ResourceManager.GetObject("test_image_computer_scientist_laplacian55", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap test_image_computer_scientist_laplacian55grey {
+            get {
+                object obj = ResourceManager.GetObject("test_image_computer_scientist_laplacian55grey", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap test_image_computer_scientist_laplacianofgaussian {
+            get {
+                object obj = ResourceManager.GetObject("test_image_computer_scientist_laplacianofgaussian", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap test_image_computer_scientist_original {
+            get {
+                object obj = ResourceManager.GetObject("test_image_computer_scientist_original", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap test_image_computer_scientist_swap {
+            get {
+                object obj = ResourceManager.GetObject("test_image_computer_scientist_swap", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

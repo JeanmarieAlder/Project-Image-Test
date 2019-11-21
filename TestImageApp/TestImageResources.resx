@@ -118,7 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="test_image_computer_scientist" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\test-image-computer-scientist.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="test_image_computer_scientist_laplacian33" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\test-image-computer-scientist-laplacian33.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="test_image_computer_scientist_laplacian33grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\test-image-computer-scientist-laplacian33grey.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="test_image_computer_scientist_laplacian55" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\test-image-computer-scientist-laplacian55.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="test_image_computer_scientist_laplacian55grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\test-image-computer-scientist-laplacian55grey.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="test_image_computer_scientist_laplacianofgaussian" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\test-image-computer-scientist-laplacianofgaussian.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="test_image_computer_scientist_original" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\test-image-computer-scientist-original.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="test_image_computer_scientist_swap" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\test-image-computer-scientist-swap.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
