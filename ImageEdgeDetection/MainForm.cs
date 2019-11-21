@@ -86,10 +86,16 @@ namespace ImageEdgeDetection
             }
         }
 
+        /// <summary>
+        /// Applies the selected edge detection method by checking 
+        /// what is the selected value of the edge detection dropdown list.
+        /// </summary>
+        /// <param name="preview">True: apply filter to the preview pic, False: apply filter to the result image</param>
         private void ApplyFilterEdge(bool preview)
         {
             if (previewBitmap == null || cmbEdgeDetection.SelectedIndex == -1)
             {
+                //abort method if no picture is selected or no filter is selected.
                 return;
             }
 
@@ -186,10 +192,13 @@ namespace ImageEdgeDetection
             {
                 if (preview == true)
                 {
+                    //if preview, then set the preview pic
                     setPreviewPic(resultEdgeFilter);
                 }
                 else
                 {
+                    //if not preview, set the result pic
+                    //(the one that will be saved locally)
                     resultBitmap = resultEdgeFilter;
                 }
             }
@@ -270,6 +279,12 @@ namespace ImageEdgeDetection
             applyfilters();
         }
 
+        /// <summary>
+        /// Checks for the selected filters and apply them
+        /// one by one (if many).
+        /// It creates a temporary bitmap and sets the preview
+        /// and the result image accordind to the filters modifications.
+        /// </summary>
         private void applyfilters()
         {
             Bitmap temp = originalBitmap;
@@ -292,6 +307,10 @@ namespace ImageEdgeDetection
 
         }
 
+        /// <summary>
+        /// Sets the preview pic of the app.
+        /// </summary>
+        /// <param name="imgToDisplay">The image to display in the preview pic</param>
         private void setPreviewPic(Bitmap imgToDisplay)
         {
             picPreview.Image = imgToDisplay;
