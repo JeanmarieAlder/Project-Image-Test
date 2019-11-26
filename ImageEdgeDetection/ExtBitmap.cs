@@ -310,6 +310,12 @@ namespace ImageEdgeDetection
             return resultBitmap;
         }
 
+        /// <summary>
+        /// This method is tested in the unit test project.
+        /// </summary>
+        /// <param name="sourceBitmap"></param>
+        /// <param name="grayscale"></param>
+        /// <returns></returns>
         public static Bitmap Laplacian3x3Filter(this Bitmap sourceBitmap, 
                                                     bool grayscale = true)
         {
